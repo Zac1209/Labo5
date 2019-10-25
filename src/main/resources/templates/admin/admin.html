@@ -2,9 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>Section XYZ</title>
+    <title>Section Admin</title>
 </head>
 <body>
-<h1>Section XYZ</h1>
+<h1>Section Admin</h1>
+<div sec:authorize="isAuthenticated()">
+    <h2><span sec:authentication="name"></span>
+        <span sec:authentication="principal.authorities">[ROLE_USER,ROLE_ADMIN]</span>
+    </h2>
+</div>
+<p>Click <a th:href="@{/publique}">ici</a> vers section publique.</p>
+<p>Click <a th:href="@{/membre}">ici</a> vers section membre.</p>
+<div sec:authorize="isAuthenticated()">
+    <hr />
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Fin de la session"/>
+    </form>
+</div>
+
 </body>
 </html>
